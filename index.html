@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Atención Veterinaria</title>
+    <!-- Vinculamos la hoja de estilos externa -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Veterinaria Inacap</h1>
+        <p>Sistema de Gestión e Historial de Pacientes Diarios</p>
+    </header>
+
+    <div class="contenedor-principal">
+        <aside class="tarjeta">
+            <h2>Ingreso de Paciente</h2>
+            <div id="alert-error" class="contenedor-error"></div>
+            <form id="form-mascota" novalidate>
+                <div class="grupo-formulario">
+                    <label for="nombre">Nombre Mascota</label>
+                    <input type="text" id="nombre" placeholder="Ej: Luna" required>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="especie">Especie</label>
+                    <select id="especie" required>
+                        <option value="">Seleccione una especie</option>
+                        <option value="Perro">Perro</option>
+                        <option value="Gato">Gato</option>
+                        <option value="Ave">Ave</option>
+                        <option value="Exótico">Exótico / Otro</option>
+                    </select>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="propietario">Nombre del Propietario</label>
+                    <input type="text" id="propietario" placeholder="Ej: María Soto" required>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="edad">Edad (Años)</label>
+                    <input type="number" id="edad" placeholder="Ej: 4" min="0" required>
+                </div>
+                <button type="submit" class="btn-registrar">Registrar Paciente</button>
+            </form>
+        </aside>
+
+        <main>
+            <section class="grid-estadisticas">
+                <div class="caja-estadistica">
+                    <div id="stat-total" class="numero-estadistica">0</div>
+                    <div class="etiqueta-estadistica">Registradas</div>
+                </div>
+                <div class="caja-estadistica pendientes">
+                    <div id="stat-pendientes" class="numero-estadistica">0</div>
+                    <div class="etiqueta-estadistica">Pendientes</div>
+                </div>
+                <div class="caja-estadistica atendidos">
+                    <div id="stat-atendidos" class="numero-estadistica">0</div>
+                    <div class="etiqueta-estadistica">Atendidas</div>
+                </div>
+            </section>
+
+            <section class="controles-adicionales">
+                <input type="text" id="filtro-buscar" class="buscador" placeholder="Buscar mascota por nombre...">
+            </section>
+
+            <section class="tabla-contenedor">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mascota</th>
+                            <th>Especie</th>
+                            <th>Propietario</th>
+                            <th>Edad</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-mascotas"></tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <!-- Vinculamos la lógica de JavaScript antes del cierre del body -->
+    <script src="script.js"></script>
+</body>
+</html>
