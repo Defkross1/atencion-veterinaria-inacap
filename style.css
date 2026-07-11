@@ -1,17 +1,17 @@
 /* --- CONFIGURACIONES GLOBALES Y VARIABLES --- */
 :root {
-  --primary: #0ea5e9; /* Color celeste institucional de veterinaria */
-  --primary-dark: #0284c7; /* Variante más oscura para efectos de hover */
-  --dark: #0f172a; /* Tono oscuro para textos principales */
-  --light: #f8fafc; /* Color gris claro de fondo */
-  --card-bg: #ffffff; /* Blanco sólido para cajas y tarjetas */
-  --success: #10b981; /* Verde para pacientes atendidos */
-  --warning: #f59e0b; /* Amarillo para pacientes pendientes */
-  --danger: #ef4444; /* Rojo para mensajes de alerta */
-  --border: #e2e8f0; /* Gris suave para líneas divisorias */
+--primary: #0ea5e9;       /* Color celeste institucional de veterinaria */
+--primary-dark: #0284c7;  /* Variante mas oscura para efectos de hover */
+--dark: #0f172a;          /* Tono oscuro para textos principales */
+--light: #f8fafc;         /* Color gris claro de fondo */
+--card-bg: #ffffff;       /* Blanco solido para cajas y tarjetas */
+--success: #10b981;       /* Verde para pacientes atendidos */
+--warning: #f59e0b;       /* Amarillo para pacientes pendientes */
+--danger: #ef4444;        /* Rojo para mensajes de alerta y botones de borrar */
+--border: #e2e8f0;        /* Gris suave para lineas divisorias y bordes */
 }
 
-* {
+*{
 margin: 0;
 padding: 0;
 box-sizing: border-box;
@@ -123,7 +123,7 @@ border-radius: 10px;
 margin-bottom: 20px;
 font-size: 0.85rem;
 line-height: 1.4;
-display: none; /* Se activa dinamicamente con JS */
+display: none;
 }
 
 /* --- BOTONES DEL SISTEMA --- */
@@ -172,7 +172,6 @@ cursor: not-allowed;
 .btn-editar {
 background-color: #fef3c7;
 color: #d97706;
-margin-left: 5px;
 }
 
 .btn-editar:hover {
@@ -183,7 +182,6 @@ color: white;
 .btn-eliminar {
 background-color: #fee2e2;
 color: var(--danger);
-margin-left: 5px;
 }
 
 .btn-eliminar:hover {
@@ -341,6 +339,7 @@ padding: 16px 20px;
 border-bottom: 1px solid var(--border);
 font-size: 0.95rem;
 vertical-align: middle;
+white-space: nowrap; /* Evita que datos como '12 años' se separen en dos lineas por falta de espacio */
 }
 
 tr:last-child td {
@@ -349,6 +348,14 @@ border-bottom: none;
 
 tr:hover {
 background-color: #f8fafc;
+}
+
+/* --- CONTENEDOR EXCLUSIVO PARA LOS BOTONES DE ACCIÓN --- */
+.contenedor-acciones {
+display: flex;
+gap: 8px;               /* Separacion identica y limpia entre cada boton */
+align-items: center;
+flex-wrap: nowrap;      /* Prohibe terminantemente que los botones se salten hacia abajo */
 }
 
 /* --- DISTINTIVOS DE ESTADO (BADGES) --- */
