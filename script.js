@@ -212,6 +212,10 @@ function mostrarMascotas() {
         // Celda que agrupa todos los botones de accion interactivos
         const tdAcciones = document.createElement('td');
 
+        // Creamos un contenedor flexbox para mantener los botones alineados en una sola fila
+        const contenedorBotones = document.createElement('div');
+        contenedorBotones.classList.add('contenedor-acciones');
+
         // Boton para cambiar el estado del paciente a Atendido
         const btnAtender = document.createElement('button');
         btnAtender.textContent = 'Atender';
@@ -221,22 +225,24 @@ function mostrarMascotas() {
         } else {
             btnAtender.addEventListener('click', () => cambiarEstado(mascota.id));
         }
-        tdAcciones.appendChild(btnAtender);
+        contenedorBotones.appendChild(btnAtender);
 
         // Boton para abrir la configuracion de edicion del registro (Desafio extra)
         const btnEditar = document.createElement('button');
         btnEditar.textContent = 'Editar';
         btnEditar.classList.add('btn', 'btn-editar');
         btnEditar.addEventListener('click', () => abrirModalEdicion(mascota.id));
-        tdAcciones.appendChild(btnEditar);
+        contenedorBotones.appendChild(btnEditar);
 
         // Boton para remover de forma definitiva al paciente (Desafio extra)
         const btnEliminar = document.createElement('button');
         btnEliminar.textContent = 'Eliminar';
         btnEliminar.classList.add('btn', 'btn-eliminar');
         btnEliminar.addEventListener('click', () => abrirModalEliminar(mascota.id));
-        tdAcciones.appendChild(btnEliminar);
+        contenedorBotones.appendChild(btnEliminar);
 
+        // Agregamos el contenedor de botones a la celda y la celda a la fila
+        tdAcciones.appendChild(contenedorBotones);
         tr.appendChild(tdAcciones);
         listaPacientesDOM.appendChild(tr);
     });
