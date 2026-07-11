@@ -9,81 +9,146 @@
 </head>
 <body>
 
-    <header>
-        <h1>Veterinaria Inacap</h1>
-        <p>Sistema de Gestión e Historial de Pacientes Diarios</p>
-    </header>
+<header>
+    <h1>Veterinaria Inacap</h1>
+    <p>Sistema de Gestión e Historial de Pacientes Diarios</p>
+</header>
 
-    <div class="contenedor-principal">
-        <aside class="tarjeta">
-            <h2>Ingreso de Paciente</h2>
-            <div id="alert-error" class="contenedor-error"></div>
-            <form id="form-mascota" novalidate>
-                <div class="grupo-formulario">
-                    <label for="nombre">Nombre Mascota</label>
-                    <input type="text" id="nombre" placeholder="Ej: Luna" required>
-                </div>
-                <div class="grupo-formulario">
-                    <label for="especie">Especie</label>
-                    <select id="especie" required>
-                        <option value="">Seleccione una especie</option>
-                        <option value="Perro">Perro</option>
-                        <option value="Gato">Gato</option>
-                        <option value="Ave">Ave</option>
-                        <option value="Exótico">Exótico / Otro</option>
-                    </select>
-                </div>
-                <div class="grupo-formulario">
-                    <label for="propietario">Nombre del Propietario</label>
-                    <input type="text" id="propietario" placeholder="Ej: María Soto" required>
-                </div>
-                <div class="grupo-formulario">
-                    <label for="edad">Edad (Años)</label>
-                    <input type="number" id="edad" placeholder="Ej: 4" min="0" required>
-                </div>
-                <button type="submit" class="btn-registrar">Registrar Paciente</button>
-            </form>
-        </aside>
+<div class="contenedor-principal">
+    <!-- FORMULARIO DE INGRESO -->
+    <aside class="tarjeta">
+        <h2>Ingreso de Paciente</h2>
+        <div id="alert-error" class="contenedor-error"></div>
 
-        <main>
-            <section class="grid-estadisticas">
-                <div class="caja-estadistica">
-                    <div id="stat-total" class="numero-estadistica">0</div>
-                    <div class="etiqueta-estadistica">Registradas</div>
-                </div>
-                <div class="caja-estadistica pendientes">
-                    <div id="stat-pendientes" class="numero-estadistica">0</div>
-                    <div class="etiqueta-estadistica">Pendientes</div>
-                </div>
-                <div class="caja-estadistica atendidos">
-                    <div id="stat-atendidos" class="numero-estadistica">0</div>
-                    <div class="etiqueta-estadistica">Atendidas</div>
-                </div>
-            </section>
+        <form id="form-mascota" novalidate>
+            <div class="grupo-formulario">
+                <label for="nombre">Nombre de la Mascota</label>
+                <input type="text" id="nombre" placeholder="Ej: Luna" required>
+            </div>
+            <div class="grupo-formulario">
+                <label for="especie">Especie</label>
+                <select id="especie" required>
+                    <option value="">Seleccione una especie</option>
+                    <option value="Perro">Perro</option>
+                    <option value="Gato">Gato</option>
+                    <option value="Ave">Ave</option>
+                    <option value="Exótico">Exótico / Otro</option>
+                </select>
+            </div>
+            <div class="grupo-formulario">
+                <label for="propietario">Nombre del Propietario</label>
+                <input type="text" id="propietario" placeholder="Ej: María Soto" required>
+            </div>
+            <div class="grupo-formulario">
+                <label for="edad">Edad (Años)</label>
+                <input type="number" id="edad" placeholder="Ej: 4" min="0" required>
+            </div>
+            <button type="submit" class="btn btn-registrar">Registrar Paciente</button>
+        </form>
+    </aside>
 
-            <section class="controles-adicionales">
-                <input type="text" id="filtro-buscar" class="buscador" placeholder="Buscar mascota por nombre...">
-            </section>
+    <!-- PANEL DE ESTADÍSTICAS Y TABLA -->
+    <main>
+        <section class="grid-estadisticas">
+            <div class="caja-estadistica">
+                <div id="stat-total" class="numero-estadistica">0</div>
+                <div class="etiqueta-estadistica">Registradas</div>
+            </div>
+            <div class="caja-estadistica pendientes">
+                <div id="stat-pendientes" class="numero-estadistica">0</div>
+                <div class="etiqueta-estadistica">Pendientes</div>
+            </div>
+            <div class="caja-estadistica atendidos">
+                <div id="stat-atendidos" class="numero-estadistica">0</div>
+                <div class="etiqueta-estadistica">Atendidas</div>
+            </div>
+        </section>
 
-            <section class="tabla-contenedor">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Mascota</th>
-                            <th>Especie</th>
-                            <th>Propietario</th>
-                            <th>Edad</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="lista-mascotas"></tbody>
-                </table>
-            </section>
-        </main>
+        <section class="controles-secundarios">
+            <div class="contenedor-busqueda">
+                <input type="text" id="filtro-buscar" class="buscador" placeholder="Buscar por mascota o dueño...">
+            </div>
+            <div class="contenedor-filtros">
+                <button class="filtro-btn activo" data-filtro="todos">Todos</button>
+                <button class="filtro-btn" data-filtro="pendientes">Pendientes</button>
+                <button class="filtro-btn" data-filtro="atendidos">Atendidos</button>
+            </div>
+            <select id="selector-orden" class="selector-orden">
+                <option value="nombre-asc">Nombre (A-Z)</option>
+                <option value="nombre-desc">Nombre (Z-A)</option>
+                <option value="edad-asc">Edad (Menor a Mayor)</option>
+                <option value="edad-desc">Edad (Mayor a Menor)</option>
+            </select>
+        </section>
+
+        <section class="tabla-contenedor">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mascota</th>
+                        <th>Especie</th>
+                        <th>Propietario</th>
+                        <th>Edad</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="lista-mascotas"></tbody>
+            </table>
+        </section>
+    </main>
+</div>
+
+<!-- MODAL DE EDICIÓN -->
+<div id="modal-edicion" class="modal-overlay">
+    <div class="modal-contenedor">
+        <h2 class="modal-titulo">Editar Ficha de Paciente</h2>
+        <div id="alert-error-modal" class="contenedor-error"></div>
+        <form id="form-edicion" novalidate>
+            <input type="hidden" id="edit-id">
+            <div class="grupo-formulario">
+                <label for="edit-nombre">Nombre de la Mascota</label>
+                <input type="text" id="edit-nombre" required>
+            </div>
+            <div class="grupo-formulario">
+                <label for="edit-especie">Especie</label>
+                <select id="edit-especie" required>
+                    <option value="Perro">Perro</option>
+                    <option value="Gato">Gato</option>
+                    <option value="Ave">Ave</option>
+                    <option value="Exótico">Exótico / Otro</option>
+                </select>
+            </div>
+            <div class="grupo-formulario">
+                <label for="edit-propietario">Nombre del Propietario</label>
+                <input type="text" id="edit-propietario" required>
+            </div>
+            <div class="grupo-formulario">
+                <label for="edit-edad">Edad (Años)</label>
+                <input type="number" id="edit-edad" min="0" required>
+            </div>
+            <div class="modal-acciones">
+                <button type="button" class="btn btn-cancelar" onclick="cerrarModal('modal-edicion')">Cancelar</button>
+                <button type="submit" class="btn btn-confirmar-guardar">Guardar Cambios</button>
+            </div>
+        </form>
     </div>
+</div>
 
-    <!-- Vinculamos la lógica de JavaScript antes del cierre del body -->
-    <script src="script.js"></script>
+<!-- MODAL DE CONFIRMACIÓN DE BORRADO -->
+<div id="modal-eliminar" class="modal-overlay">
+    <div class="modal-contenedor">
+        <h2 class="modal-titulo-danger">¿Eliminar Registro?</h2>
+        <p class="modal-mensaje">Esta acción eliminará permanentemente al paciente de los registros diarios.</p>
+        <input type="hidden" id="delete-id">
+        <div class="modal-acciones">
+            <button type="button" class="btn btn-cancelar" onclick="cerrarModal('modal-eliminar')">Cancelar</button>
+            <button type="button" class="btn btn-confirmar-eliminar" id="confirmar-eliminacion-btn">Eliminar Paciente</button>
+        </div>
+    </div>
+</div>
+
+<!-- Vinculación del JavaScript -->
+<script src="script.js"></script>
 </body>
 </html>
