@@ -1,0 +1,473 @@
+/* --- CONFIGURACIONES GLOBALES Y VARIABLES --- */
+:root {
+  --primary: #0ea5e9; /* Color celeste institucional de veterinaria */
+  --primary-dark: #0284c7; /* Variante más oscura para efectos de hover */
+  --dark: #0f172a; /* Tono oscuro para textos principales */
+  --light: #f8fafc; /* Color gris claro de fondo */
+  --card-bg: #ffffff; /* Blanco sólido para cajas y tarjetas */
+  --success: #10b981; /* Verde para pacientes atendidos */
+  --warning: #f59e0b; /* Amarillo para pacientes pendientes */
+  --danger: #ef4444; /* Rojo para mensajes de alerta */
+  --border: #e2e8f0; /* Gris suave para líneas divisorias */
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+background-color: var(--light);
+color: var(--dark);
+min-height: 100vh;
+padding: 20px;
+}
+
+/* --- ENCABEZADO PRINCIPAL --- */
+header {
+max-width: 1200px;
+margin: 0 auto 30px auto;
+text-align: center;
+padding: 25px;
+background: linear-gradient(135deg, var(--primary), #3b82f6);
+color: white;
+border-radius: 20px;
+box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.15);
+}
+
+header h1 {
+font-size: 2.2rem;
+font-weight: 800;
+margin-bottom: 8px;
+}
+
+header p {
+font-size: 1rem;
+opacity: 0.9;
+}
+
+/* --- DISTRIBUCIÓN GRID EN DOBLE COLUMNA --- */
+.contenedor-principal {
+max-width: 1200px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: 1fr;
+gap: 30px;
+}
+
+@media (min-width: 992px) {
+.contenedor-principal {
+grid-template-columns: 380px 1fr;
+}
+}
+
+/* --- ESTILO DE TARJETAS --- */
+.tarjeta {
+background-color: var(--card-bg);
+border-radius: 16px;
+padding: 24px;
+box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+border: 1px solid var(--border);
+height: fit-content;
+}
+
+.tarjeta h2 {
+font-size: 1.3rem;
+font-weight: 700;
+margin-bottom: 20px;
+padding-bottom: 12px;
+border-bottom: 2px solid var(--light);
+}
+
+/* --- ELEMENTOS DE FORMULARIO --- */
+.grupo-formulario {
+margin-bottom: 18px;
+}
+
+.grupo-formulario label {
+display: block;
+margin-bottom: 6px;
+font-weight: 600;
+font-size: 0.85rem;
+color: #64748b;
+}
+
+.grupo-formulario input,
+.grupo-formulario select {
+width: 100%;
+padding: 11px 14px;
+border: 2px solid var(--border);
+border-radius: 10px;
+font-size: 0.95rem;
+outline: none;
+background-color: var(--light);
+transition: all 0.2s ease-in-out;
+}
+
+.grupo-formulario input:focus,
+.grupo-formulario select:focus {
+border-color: var(--primary);
+background-color: #ffffff;
+box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+}
+
+/* --- BANNER DE ALERTA DE ERRORES --- */
+.contenedor-error {
+background-color: #fef2f2;
+border-left: 4px solid var(--danger);
+color: #991b1b;
+padding: 14px;
+border-radius: 10px;
+margin-bottom: 20px;
+font-size: 0.85rem;
+line-height: 1.4;
+display: none; /* Se activa dinamicamente con JS */
+}
+
+/* --- BOTONES DEL SISTEMA --- */
+.btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+font-weight: 700;
+border-radius: 10px;
+cursor: pointer;
+transition: all 0.2s ease;
+border: none;
+font-size: 0.9rem;
+padding: 10px 16px;
+}
+
+.btn-registrar {
+width: 100%;
+background-color: var(--primary);
+color: white;
+padding: 14px;
+font-size: 1rem;
+}
+
+.btn-registrar:hover {
+background-color: var(--primary-dark);
+transform: translateY(-1px);
+}
+
+.btn-atender {
+background-color: #e0f2fe;
+color: var(--primary-dark);
+}
+
+.btn-atender:hover:not(:disabled) {
+background-color: var(--primary);
+color: white;
+}
+
+.btn-atender:disabled {
+background-color: #f1f5f9;
+color: #94a3b8;
+cursor: not-allowed;
+}
+
+.btn-editar {
+background-color: #fef3c7;
+color: #d97706;
+margin-left: 5px;
+}
+
+.btn-editar:hover {
+background-color: var(--warning);
+color: white;
+}
+
+.btn-eliminar {
+background-color: #fee2e2;
+color: var(--danger);
+margin-left: 5px;
+}
+
+.btn-eliminar:hover {
+background-color: var(--danger);
+color: white;
+}
+
+/* --- CONTADORES ESTADÍSTICOS --- */
+.grid-estadisticas {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 15px;
+margin-bottom: 25px;
+}
+
+.caja-estadistica {
+background-color: var(--card-bg);
+padding: 16px;
+border-radius: 14px;
+text-align: center;
+box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+border-top: 5px solid var(--primary);
+border-left: 1px solid var(--border);
+border-right: 1px solid var(--border);
+border-bottom: 1px solid var(--border);
+}
+
+.caja-estadistica.pendientes {
+border-top-color: var(--warning);
+}
+
+.caja-estadistica.atendidos {
+border-top-color: var(--success);
+}
+
+.numero-estadistica {
+font-size: 2rem;
+font-weight: 800;
+color: var(--dark);
+margin-bottom: 4px;
+}
+
+.etiqueta-estadistica {
+font-size: 0.75rem;
+color: #64748b;
+text-transform: uppercase;
+font-weight: 700;
+letter-spacing: 0.5px;
+}
+
+/* --- SECCIÓN DE BUSCADOR, FILTROS Y ORDEN --- */
+.controles-secundarios {
+background-color: var(--card-bg);
+padding: 20px;
+border-radius: 14px;
+margin-bottom: 25px;
+border: 1px solid var(--border);
+box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+@media (min-width: 768px) {
+.controles-secundarios {
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+}
+}
+
+.contenedor-busqueda {
+flex: 1;
+position: relative;
+}
+
+.buscador {
+width: 100%;
+padding: 11px 16px;
+border: 2px solid var(--border);
+border-radius: 10px;
+font-size: 0.9rem;
+outline: none;
+transition: border-color 0.2s;
+}
+
+.buscador:focus {
+border-color: var(--primary);
+}
+
+.contenedor-filtros {
+display: flex;
+gap: 8px;
+flex-wrap: wrap;
+}
+
+.filtro-btn {
+background-color: var(--light);
+border: 1px solid var(--border);
+padding: 8px 16px;
+border-radius: 8px;
+font-size: 0.85rem;
+font-weight: 600;
+cursor: pointer;
+color: #64748b;
+transition: all 0.2s;
+}
+
+.filtro-btn.activo {
+background-color: var(--primary);
+color: white;
+border-color: var(--primary);
+}
+
+.selector-orden {
+padding: 10px;
+border: 2px solid var(--border);
+border-radius: 10px;
+font-size: 0.85rem;
+font-weight: 600;
+outline: none;
+background-color: var(--light);
+cursor: pointer;
+}
+
+/* --- TABLA PRINCIPAL --- */
+.tabla-contenedor {
+background-color: var(--card-bg);
+border-radius: 16px;
+border: 1px solid var(--border);
+box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+overflow-x: auto;
+}
+
+table {
+width: 100%;
+border-collapse: collapse;
+text-align: left;
+min-width: 700px;
+}
+
+th {
+background-color: #f8fafc;
+color: #64748b;
+padding: 16px 20px;
+font-size: 0.8rem;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+border-bottom: 2px solid var(--border);
+}
+
+td {
+padding: 16px 20px;
+border-bottom: 1px solid var(--border);
+font-size: 0.95rem;
+vertical-align: middle;
+}
+
+tr:last-child td {
+border-bottom: none;
+}
+
+tr:hover {
+background-color: #f8fafc;
+}
+
+/* --- DISTINTIVOS DE ESTADO (BADGES) --- */
+.badge {
+display: inline-flex;
+align-items: center;
+padding: 6px 12px;
+border-radius: 9999px;
+font-size: 0.75rem;
+font-weight: 700;
+}
+
+.badge-pendiente {
+background-color: #fef3c7;
+color: #b45309;
+}
+
+.badge-atendido {
+background-color: #d1fae5;
+color: #065f46;
+}
+
+.vacio-mensaje {
+text-align: center;
+color: #94a3b8;
+padding: 40px;
+font-style: italic;
+font-size: 0.95rem;
+}
+
+/* --- VENTANAS FLOTANTES (MODALES) --- */
+.modal-overlay {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: rgba(15, 23, 42, 0.6);
+backdrop-filter: blur(4px);
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 1000;
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.3s ease;
+}
+
+.modal-overlay.activo {
+opacity: 1;
+pointer-events: auto;
+}
+
+.modal-contenedor {
+background-color: var(--card-bg);
+border-radius: 16px;
+width: 90%;
+max-width: 500px;
+padding: 24px;
+box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+transform: scale(0.9);
+transition: transform 0.3s ease;
+}
+
+.modal-overlay.activo .modal-contenedor {
+transform: scale(1);
+}
+
+.modal-titulo {
+font-size: 1.3rem;
+font-weight: 700;
+margin-bottom: 20px;
+color: var(--dark);
+}
+
+.modal-titulo-danger {
+font-size: 1.3rem;
+font-weight: 700;
+margin-bottom: 15px;
+color: var(--danger);
+}
+
+.modal-mensaje {
+color: #64748b;
+font-size: 0.95rem;
+line-height: 1.5;
+margin-bottom: 20px;
+}
+
+.modal-acciones {
+display: flex;
+justify-content: flex-end;
+gap: 10px;
+margin-top: 24px;
+}
+
+.btn-cancelar {
+background-color: #f1f5f9;
+color: #475569;
+}
+
+.btn-cancelar:hover {
+background-color: #e2e8f0;
+}
+
+.btn-confirmar-guardar {
+background-color: var(--success);
+color: white;
+}
+
+.btn-confirmar-guardar:hover {
+background-color: #059669;
+}
+
+.btn-confirmar-eliminar {
+background-color: var(--danger);
+color: white;
+}
+
+.btn-confirmar-eliminar:hover {
+background-color: #dc2626;
+}
